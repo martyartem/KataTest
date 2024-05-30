@@ -1,1 +1,1 @@
-# KataTest
+# KataTest - калькулятор
