@@ -72,7 +72,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Введите выражение")
 
-	// Чтение ввода
+	// Чтение ввода пользователя
 	input, _ := reader.ReadString('\n')
 	input = strings.TrimSpace(input)
 
