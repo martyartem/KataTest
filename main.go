@@ -43,10 +43,22 @@ func arabicToRoman(num int) (string, error) {
 	if num <= 0 {
 		return "", errors.New("Римские цифры должны быть положительными")
 	}
-	if val, ok := arabicNums[num]; ok {
-		return val, nil
+	return intToRoman(num), nil
+}
+
+// Для арабских больше 10
+func intToRoman(num int) string {
+	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	sym := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+
+	roman := ""
+	for i := 0; i < len(val); i++ {
+		for num >= val[i] {
+			num -= val[i]
+			roman += sym[i]
+		}
 	}
-	return "", errors.New("Число вне диапазона")
+	return roman
 }
 
 // Арифметические операции
@@ -104,7 +116,7 @@ func main() {
 			panic(err)
 		}
 		if result < 1 {
-			panic("результат меньше единицы для римских чисел")
+			panic("Результат меньше единицы для римских чисел")
 		}
 		romanResult, err := arabicToRoman(result)
 		if err != nil {
@@ -116,7 +128,7 @@ func main() {
 		a, _ := strconv.Atoi(num1)
 		b, _ := strconv.Atoi(num2)
 		if a < 1 || a > 10 || b < 1 || b > 10 {
-			panic("Арабаские числа должны быть в диапазоне от 1 до 10")
+			panic("Арабские числа должны быть в диапазоне от 1 до 10")
 		}
 		result, err = calculate(a, b, op)
 		if err != nil {
